@@ -3,6 +3,11 @@ import serial.tools.list_ports as listPorts
 BAUD = 9600
 TIMEOUT = 1
 
+product_list = {
+    "lata de champiñones" : [0, 9.5],
+    "botella de agua" : [0, 11]
+}
+
 class Sensor():
     def __init__(self, *args, **kwargs):
         '''Init sensor'''
@@ -36,13 +41,16 @@ class Sensor():
         data_3 = data.split(' ')[2]
         return data_1, data_2, data_3
 
+def calculate_products():
+    for product in product_list.keys():
+        product
+
 def main():
     srl = Sensor()
     srl.init_sensor()
     while True:
         data_1, data_2, data_3 = srl.read_data()
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
-    pass
 
 if __name__ == '__main__':
     main()
