@@ -20,7 +20,7 @@ class Sensor():
 
     def init_sensor(self):
         '''Create serial'''
-        self.serial = serial.Serial(port_names(self), BAUD, TIMEOUT)
+        self.serial = serial.Serial(self.port_names(self), BAUD, TIMEOUT)
 
     def read_data(self):
         '''Read data from sensors
