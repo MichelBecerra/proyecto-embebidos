@@ -37,24 +37,15 @@ void loop() {
     duracion3 = pulseIn(echoPin3, HIGH);            //Determina la duración
 
     distancia = (duracion/2) / 29.1;             //Calcula la distancia en cm
-    if (distancia >= rangoMaximo || distancia <= rangoMinimo){
-      Serial.println(distancia);     //Envía a la computadora por el puerto serial el mensaje: 'La casa está segura.'
-    } else {    
-      Serial.println(distancia); //Envía a la computadora por el puerto serial el mensaje: 'Hay un intruso en la casa.'
-    }
 
     distancia2 = (duracion2/2) / 29.1;             //Calcula la distancia en cm
-    if (distancia2 >= rangoMaximo || distancia2 <= rangoMinimo){
-      Serial.println(distancia2);     //Envía a la computadora por el puerto serial el mensaje: 'La casa está segura.'
-    } else {    
-      Serial.println(distancia2); //Envía a la computadora por el puerto serial el mensaje: 'Hay un intruso en la casa.'
-    }
     
     distancia3 = (duracion3/2) / 29.1;             //Calcula la distancia en cm
-    if (distancia3 >= rangoMaximo || distancia3 <= rangoMinimo){
-      Serial.println(distancia3);     //Envía a la computadora por el puerto serial el mensaje: 'La casa está segura.'
-    } else {    
-      Serial.println(distancia3); //Envía a la computadora por el puerto serial el mensaje: 'Hay un intruso en la casa.'
-    } 
+
+    Serial.print(distancia2);
+    Serial.print(" ");
+    Serial.print(distancia);
+    Serial.print(" ");
+    Serial.println(distancia3);
     delay(500);                          // Hace un retardo de 0.5 segundos antes de la próxima lectura.
 }
