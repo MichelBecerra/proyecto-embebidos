@@ -31,7 +31,6 @@ class Sensor():
         while(self.serial.inWaiting() > 0):
             data = self.serial.readline().decode('utf-8')
         data = self.serial.readline().decode('utf-8')
-        print(data)
         data_1 = data.split(' ')[0]
         data_2 = data.split(' ')[1]
         data_3 = data.split(' ')[2]
@@ -42,7 +41,7 @@ def main():
     srl.init_sensor()
     while True:
         data_1, data_2, data_3 = srl.read_data()
-        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n").format(data_1, data_2, data_3)
+        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
     pass
 
 if __name__ == '__main__':
