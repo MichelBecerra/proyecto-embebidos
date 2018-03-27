@@ -6,7 +6,7 @@ TIMEOUT = 1
 class Sensor():
     def __init__(self, *args, **kwargs):
         '''Init sensor'''
-        self.srl = ''
+        self.srl = None
 
     def port_names(self):
         '''Return portname'''
@@ -20,7 +20,7 @@ class Sensor():
 
     def init_sensor(self):
         '''Create serial'''
-        self.serial = serial.Serial(self.port_names(), BAUD, timeout= TIMEOUT)
+        self.srl = serial.Serial(self.port_names(), BAUD, timeout= TIMEOUT)
 
     def read_data(self):
         '''Read data from sensors
