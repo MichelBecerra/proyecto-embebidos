@@ -16,7 +16,7 @@ class Sensor():
                 continue
             else:
                 pnames.append(port[0])
-        return pnames
+        return pnames[0]
 
     def init_sensor(self):
         '''Create serial'''
