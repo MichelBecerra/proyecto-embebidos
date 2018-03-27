@@ -46,5 +46,4 @@ void loop() {
     Serial.print(distancia2);
     Serial.print(" ");
     Serial.println(distancia3);
-    delay(500);                          // Hace un retardo de 0.5 segundos antes de la próxima lectura.
 }
