@@ -45,12 +45,12 @@ class Sensor():
 def calculate_products():
     for product in product_list.keys():
         product
-
+        
 def main():
     srl = Sensor()
     srl.init_sensor()
-    time.sleep(10)
     print ("Leyendo datos ...")
+    time.sleep(5)
     while True:
         data_1, data_2, data_3 = srl.read_data()
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
