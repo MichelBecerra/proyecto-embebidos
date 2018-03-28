@@ -1,3 +1,4 @@
+# coding=utf-8
 import time
 import serial
 import serial.tools.list_ports as listPorts
