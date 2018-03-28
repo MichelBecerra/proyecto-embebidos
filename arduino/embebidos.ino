@@ -21,17 +21,17 @@ void setup() {
 void loop() {   
 
     digitalWrite(trigPin, HIGH);   //El siguiente ciclo trigPin / echoPin
-    delayMicroseconds(1000);  
+    //delayMicroseconds(1000);  
     digitalWrite(trigPin, LOW);    //objeto más cercano haciendo rebotar ondas sonoras fuera de ella
     duracion = pulseIn(echoPin, HIGH);            //Determina la duración
   
     digitalWrite(trigPin2, HIGH);   //El siguiente ciclo trigPin / echoPin
-    delayMicroseconds(1000);       //se utiliza para determinar la distancia del
+    //delayMicroseconds(1000);       //se utiliza para determinar la distancia del
     digitalWrite(trigPin2, LOW);    //objeto más cercano haciendo rebotar ondas sonoras fuera de ella
     duracion2 = pulseIn(echoPin2, HIGH);            //Determina la duración
     
     digitalWrite(trigPin3, HIGH);   //El siguiente ciclo trigPin / echoPin
-    delayMicroseconds(1000);  
+    //delayMicroseconds(1000);  
     digitalWrite(trigPin3, LOW);    //objeto más cercano haciendo rebotar ondas sonoras fuera de ella
     duracion3 = pulseIn(echoPin3, HIGH);            //Determina la duración
 
