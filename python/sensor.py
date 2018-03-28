@@ -56,9 +56,9 @@ def main():
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
-        con.updateCantidad(contenedorUno, data_1 )
-        con.updateCantidad(contenedorDos, data_2)
-        con.updateCantidad(contenedorTres, data_3)
+        con.updateCantidad('contenedorUno', data_1 )
+        con.updateCantidad('contenedorDos', data_2)
+        con.updateCantidad('contenedorTres', data_3)
 
 if __name__ == '__main__':
     main()
