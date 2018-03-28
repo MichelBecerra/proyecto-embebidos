@@ -49,10 +49,10 @@ def calculate_products():
         product
 
 def main():
-    #srl = Sensor()
-    #srl.init_sensor()
-    #print ("Leyendo datos ...")
-    #time.sleep(3)
+    srl = Sensor()
+    srl.init_sensor()
+    print ("Leyendo datos ...")
+    time.sleep(3)
     while True:
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
