@@ -31,21 +31,6 @@ class Sensor():
         '''Create serial'''
         self.serial = serial.Serial(self.port_names(), BAUD, timeout= TIMEOUT)
 
-    def selectContenedor(contenedor):
-        fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
-        address = '/Sensores/' + contenedor
-        result = fb.get(address, None)
-        print(result)
-        return result
-
-    # update/post
-    def updateCantidad(contenedor, cantidad):
-        fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
-        address = '/Sensores/' + contenedor
-        result = fb.put(address, 'cantidad', cantidad)
-        print(result)
-        return result
-
     def read_data(self):
         '''Read data from sensors
         data[0] --> sensor 1
@@ -63,6 +48,22 @@ class Sensor():
 def calculate_products():
     for product in product_list.keys():
         product
+
+
+def selectContenedor(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.get(address, None)
+    print(result)
+    return result
+
+# update/post
+def updateCantidad(contenedor, cantidad):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.put(address, 'cantidad', cantidad)
+    print(result)
+    return result
 
 def main():
     srl = Sensor()
