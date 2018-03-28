@@ -35,8 +35,8 @@ class Sensor():
         data[2] --> sensor 3'''
         data = ''
         while(self.serial.inWaiting() > 0):
-            data = self.serial.readline().decode('utf-8').strip()
-        data = self.serial.readline().decode('utf-8').strip()
+            data = self.serial.readline().encode('utf-8').strip()
+        data = self.serial.readline().encode('utf-8').strip()
         data_1 = data.split(' ')[0]
         data_2 = data.split(' ')[1]
         data_3 = data.split(' ')[2]
@@ -50,7 +50,7 @@ def main():
     srl = Sensor()
     srl.init_sensor()
     print ("Leyendo datos ...")
-    time.sleep(5)
+    time.sleep(3)
     while True:
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
