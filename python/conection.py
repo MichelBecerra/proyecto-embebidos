@@ -1,25 +1,14 @@
 from firebase import firebase
-
-class Connections():
-    def __init__(self):
-        #vacio
-
-    # select/get
-    def selectContenedor(self, contenedor):
-        firebase = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
-        contenedor2 = '/Sensores/' + contenedor
-        result = firebase.get(contenedor2, None)
-        print(result)
-        return result
-
-    # update/post
-    def updateCantidad(self, contenedor, cantidad):
-        firebase = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
-        contenedor2 = '/Sensores/' + contenedor
-        result = firebase.put(contenedor2, 'cantidad', cantidad)
-        print(result)
-        return result
-
+fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+# select/get
+result = fb.get('/Sensores/contenedorDos', None)
+print(result)
+# update/post
+contenedor1 = 'contenedorTres'
+contenedor2 = '/Sensores/' + contenedor1
+print (contenedor2)
+result2 = fb.put(contenedor2, 'cantidad', 7)
+print(result2)
 
 #from firebase import firebase
 #from firebase_admin import db
