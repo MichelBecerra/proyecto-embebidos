@@ -1,14 +1,26 @@
 from firebase import firebase
-fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+
 # select/get
-result = fb.get('/Sensores/contenedorDos', None)
-print(result)
+def selectContenedor(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.get(address, None)
+    print(result)
+    return result
+
 # update/post
-contenedor1 = 'contenedorTres'
-contenedor2 = '/Sensores/' + contenedor1
-print (contenedor2)
-result2 = fb.put(contenedor2, 'cantidad', 7)
-print(result2)
+def updateCantidad(contenedor, cantidad):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.put(address, 'cantidad', cantidad)
+    print(result)
+    return result
+
+contenedor = raw_input("Contenedor: ")
+valor = raw_input("Valor: ")
+updateCantidad(contenedor, valor)
+
+
 
 #from firebase import firebase
 #from firebase_admin import db
