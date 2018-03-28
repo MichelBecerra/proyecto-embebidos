@@ -52,6 +52,7 @@ def main():
     print ("Leyendo datos ...")
     time.sleep(5)
     while True:
+        time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
 
