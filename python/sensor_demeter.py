@@ -2,7 +2,7 @@
 import time
 import serial
 import serial.tools.list_ports as listPorts
-import conection_demeter
+from firebase import firebase
 
 BAUD = 9600
 TIMEOUT = 1
@@ -30,6 +30,21 @@ class Sensor():
     def init_sensor(self):
         '''Create serial'''
         self.serial = serial.Serial(self.port_names(), BAUD, timeout= TIMEOUT)
+
+    def selectContenedor(contenedor):
+        fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+        address = '/Sensores/' + contenedor
+        result = fb.get(address, None)
+        print(result)
+        return result
+
+    # update/post
+    def updateCantidad(contenedor, cantidad):
+        fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+        address = '/Sensores/' + contenedor
+        result = fb.put(address, 'cantidad', cantidad)
+        print(result)
+        return result
 
     def read_data(self):
         '''Read data from sensors
