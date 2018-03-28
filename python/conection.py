@@ -14,4 +14,3 @@ def updateCantidad(contenedor, cantidad):
     address = '/Sensores/' + contenedor
     result = fb.put(address, 'cantidad', cantidad)
     print(result)
-    return result
