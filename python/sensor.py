@@ -36,9 +36,9 @@ class Sensor():
         while(self.serial.inWaiting() > 0):
             data = self.serial.readline().decode('utf-8')
         data = self.serial.readline().decode('utf-8')
-        data_1 = data.split(' ')[0]
-        data_2 = data.split(' ')[1]
-        data_3 = data.split(' ')[2]
+        data_1 = data.split(' ')[0].strip()
+        data_2 = data.split(' ')[1].strip()
+        data_3 = data.split(' ')[2].strip()
         return data_1, data_2, data_3
 
 def calculate_products():
