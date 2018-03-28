@@ -35,11 +35,11 @@ class Sensor():
         data[2] --> sensor 3'''
         data = ''
         while(self.serial.inWaiting() > 0):
-            data = self.serial.readline()
-        data = self.serial.readline()
-        data_1 = data.split(' ')[0].strip()
-        data_2 = data.split(' ')[1].strip()
-        data_3 = data.split(' ')[2].strip()
+            data = self.serial.readline().decode('utf-8').strip()
+        data = self.serial.readline().decode('utf-8').strip()
+        data_1 = data.split(' ')[0]
+        data_2 = data.split(' ')[1]
+        data_3 = data.split(' ')[2]
         return data_1, data_2, data_3
 
 def calculate_products():
