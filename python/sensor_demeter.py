@@ -1,7 +1,7 @@
 import time
 import serial
 import serial.tools.list_ports as listPorts
-import conection_demeter
+#import conection_demeter
 
 BAUD = 9600
 TIMEOUT = 1
@@ -55,14 +55,14 @@ def main():
     #time.sleep(3)
     while True:
         time.sleep(2)
-        #data_1, data_2, data_3 = srl.read_data()
-        data_1 = 1
-        data_2 = 2
-        data_3 = 3
+        data_1, data_2, data_3 = srl.read_data()
+        #data_1 = 1
+        #data_2 = 2
+        #data_3 = 3
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
-        updateCantidad("contenedorUno", data_1)
-        updateCantidad("contenedorDos", data_2)
-        updateCantidad("contenedorTres", data_3)
+        #updateCantidad("contenedorUno", data_1)
+        #updateCantidad("contenedorDos", data_2)
+        #updateCantidad("contenedorTres", data_3)
 
 
 if __name__ == '__main__':
