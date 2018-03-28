@@ -1,8 +1,12 @@
 import time
 import serial
 import serial.tools.list_ports as listPorts
+<<<<<<< HEAD:python/sensor_demeter.py
 import conection_demeter
 
+=======
+import demeter_connection as con
+>>>>>>> a07f79472961d1871993589fbf7516310b19ef66:python/sensor.py
 BAUD = 9600
 TIMEOUT = 1
 
@@ -60,10 +64,16 @@ def main():
         data_2 = 2
         data_3 = 3
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
+<<<<<<< HEAD:python/sensor_demeter.py
         updateCantidad("contenedorUno", data_1)
         updateCantidad("contenedorDos", data_2)
         updateCantidad("contenedorTres", data_3)
 
+=======
+        con.updateCantidad('contenedorUno', data_1 )
+        con.updateCantidad('contenedorDos', data_2)
+        con.updateCantidad('contenedorTres', data_3)
+>>>>>>> a07f79472961d1871993589fbf7516310b19ef66:python/sensor.py
 
 if __name__ == '__main__':
     main()
