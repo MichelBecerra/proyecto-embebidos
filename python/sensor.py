@@ -1,3 +1,4 @@
+import time
 import serial
 import serial.tools.list_ports as listPorts
 BAUD = 9600
@@ -48,6 +49,8 @@ def calculate_products():
 def main():
     srl = Sensor()
     srl.init_sensor()
+    time.sleep(10)
+    print ("Leyendo datos ...")
     while True:
         data_1, data_2, data_3 = srl.read_data()
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
