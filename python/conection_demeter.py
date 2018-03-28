@@ -16,8 +16,8 @@ def updateCantidad(contenedor, cantidad):
     print(result)
     return result
 
-contenedor = raw_input("Contenedor: ")
-valor = raw_input("Valor: ")
+contenedor = input("Contenedor: ")
+valor = input("Valor: ")
 updateCantidad(contenedor, valor)
 
 
