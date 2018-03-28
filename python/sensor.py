@@ -35,8 +35,8 @@ class Sensor():
         data[2] --> sensor 3'''
         data = ''
         while(self.serial.inWaiting() > 0):
-            data = self.serial.readline().decode('utf-8')
-        data = self.serial.readline().decode('utf-8')
+            data = self.serial.readline()
+        data = self.serial.readline()
         data_1 = data.split(' ')[0].strip()
         data_2 = data.split(' ')[1].strip()
         data_3 = data.split(' ')[2].strip()
