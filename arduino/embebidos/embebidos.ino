@@ -46,4 +46,5 @@ void loop() {
     Serial.print(distancia2);
     Serial.print(" ");
     Serial.println(distancia3);
+    delay(500);
 }
