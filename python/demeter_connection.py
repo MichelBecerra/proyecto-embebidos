@@ -3,8 +3,7 @@ from firebase import firebase
 # select/get
 def selectContenedor(contenedor):
     fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
-    address = '/Sensores/' + contenedor
-    result = fb.get(address, None)
+    result = fb.get(contenedor, None)
     print(result)
     return result
 

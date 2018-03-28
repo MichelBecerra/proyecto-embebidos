@@ -1,7 +1,7 @@
 import time
 import serial
 import serial.tools.list_ports as listPorts
-import conection as con
+import demeter_connection as con
 BAUD = 9600
 TIMEOUT = 1
 
