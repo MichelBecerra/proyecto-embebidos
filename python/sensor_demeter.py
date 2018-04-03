@@ -1,12 +1,9 @@
+# coding=utf-8
 import time
 import serial
 import serial.tools.list_ports as listPorts
-<<<<<<< HEAD:python/sensor_demeter.py
-import conection_demeter
+from firebase import firebase
 
-=======
-import demeter_connection as con
->>>>>>> a07f79472961d1871993589fbf7516310b19ef66:python/sensor.py
 BAUD = 9600
 TIMEOUT = 1
 
@@ -52,28 +49,46 @@ def calculate_products():
     for product in product_list.keys():
         product
 
+
+def selectContenedor(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.get(address, None)
+    print(result)
+    return result
+
+# update/post
+def updateCantidad(contenedor, cantidad):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.put(address, 'cantidad', cantidad)
+    print(result)
+    return result
+
+def selectConfig(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Config/' + contenedor
+    record = fb.get(address, None)
+    maxValue = record.get('max')
+    minValue = record.get('min')
+    print( "Max: " + maxValue)
+    print( "Min: " + minValue)
+    return maxValue, minValue
+
+
 def main():
-    #srl = Sensor()
-    #srl.init_sensor()
-    #print ("Leyendo datos ...")
-    #time.sleep(3)
+    srl = Sensor()
+    srl.init_sensor()
+    print ("Leyendo datos ...")
+    time.sleep(3)
     while True:
         time.sleep(2)
-        #data_1, data_2, data_3 = srl.read_data()
-        data_1 = 1
-        data_2 = 2
-        data_3 = 3
+        data_1, data_2, data_3 = srl.read_data()
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
-<<<<<<< HEAD:python/sensor_demeter.py
         updateCantidad("contenedorUno", data_1)
         updateCantidad("contenedorDos", data_2)
         updateCantidad("contenedorTres", data_3)
 
-=======
-        con.updateCantidad('contenedorUno', data_1 )
-        con.updateCantidad('contenedorDos', data_2)
-        con.updateCantidad('contenedorTres', data_3)
->>>>>>> a07f79472961d1871993589fbf7516310b19ef66:python/sensor.py
 
 if __name__ == '__main__':
     main()
