@@ -69,11 +69,8 @@ def selectConfig(contenedor):
     fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
     address = '/Config/' + contenedor
     record = fb.get(address, None)
-    maxValue = record.get('max')
-    minValue = record.get('min')
-    print( "Max: " + maxValue)
-    print( "Min: " + minValue)
-    return maxValue, minValue
+    diametro = record["diametro"]
+    return diametro
 
 
 def main():
@@ -84,10 +81,13 @@ def main():
     while True:
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
-        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
-        updateCantidad("contenedorUno", data_1)
-        updateCantidad("contenedorDos", data_2)
-        updateCantidad("contenedorTres", data_3)
+        config1 = selectConfig(contenedorUno)
+        config2 = selectConfig(contenedorUno)
+        config3 = selectConfig(contenedorDos)
+        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1/config1, data_2/config2, data_3/config3))
+        updateCantidad("contenedorUno", data_1/config1)
+        updateCantidad("contenedorDos", data_2/config2)
+        updateCantidad("contenedorTres", data_3/config3)
 
 
 if __name__ == '__main__':
