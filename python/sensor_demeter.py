@@ -81,9 +81,9 @@ def main():
     while True:
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
-        config1 = selectConfig(contenedorUno)
-        config2 = selectConfig(contenedorUno)
-        config3 = selectConfig(contenedorDos)
+        config1 = selectConfig("contenedorUno")
+        config2 = selectConfig("contenedorDos")
+        config3 = selectConfig("contenedorTres")
         print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1/config1, data_2/config2, data_3/config3))
         updateCantidad("contenedorUno", data_1/config1)
         updateCantidad("contenedorDos", data_2/config2)
