@@ -40,9 +40,9 @@ class Sensor():
         while(self.serial.inWaiting() > 0):
             data = self.serial.readline().decode('utf-8').strip()
         data = self.serial.readline().decode('utf-8').strip()
-        data_1 = data.split(' ')[0]
-        data_2 = data.split(' ')[1]
-        data_3 = data.split(' ')[2]
+        data_1 = 26 - float(data.split(' ')[0])
+        data_2 = 26 - float(data.split(' ')[1])
+        data_3 = 26 - float(data.split(' ')[2])
         return data_1, data_2, data_3
 
 def calculate_products():
@@ -81,13 +81,13 @@ def main():
     while True:
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
-        config1 = selectConfig("contenedorUno")
-        config2 = selectConfig("contenedorDos")
-        config3 = selectConfig("contenedorTres")
-        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1/config1, data_2/config2, data_3/config3))
-        updateCantidad("contenedorUno", data_1/config1)
-        updateCantidad("contenedorDos", data_2/config2)
-        updateCantidad("contenedorTres", data_3/config3)
+        config1 = float(selectConfig("contenedorUno"))
+        config2 = float(selectConfig("contenedorDos"))
+        config3 = float(selectConfig("contenedorTres"))
+        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(abs(round(data_1/config1)), abs(round(data_2/config2)), abs(round(data_3/config3))))
+        updateCantidad("contenedorUno", abs(round(data_1/config1)))
+        updateCantidad("contenedorDos", abs(round(data_2/config2)))
+        updateCantidad("contenedorTres", abs(round(data_3/config3)))
 
 
 if __name__ == '__main__':
