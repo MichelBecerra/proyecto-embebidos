@@ -16,12 +16,6 @@ def updateCantidad(contenedor, cantidad):
     print(result)
     return result
 
-contenedor = raw_input("Contenedor: ")
-valor = raw_input("Valor: ")
-updateCantidad(contenedor, valor)
-
-
-
 #from firebase import firebase
 #from firebase_admin import db
 #import threading

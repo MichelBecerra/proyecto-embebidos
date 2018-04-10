@@ -31,6 +31,9 @@ def enviar_correo_electronico():
 	smtpserver.sendmail(REMITENTE, DESTINATARIO, msg)	#Enviamos el correo electronico
 	smtpserver.close()									#Cerramos la conexion con el SMTP server de Google
 
+BAUD = 9600
+TIMEOUT = 1
+
 product_list = {
     "lata de champiñones" : [0, 9.5],
     "botella de agua" : [0, 11]
@@ -64,9 +67,11 @@ class Sensor():
         while(self.serial.inWaiting() > 0):
             data = self.serial.readline().decode('utf-8').strip()
         data = self.serial.readline().decode('utf-8').strip()
+        
         data_1 = 26 - float(data.split(' ')[0])
         data_2 = 26 - float(data.split(' ')[1])
         data_3 = 26 - float(data.split(' ')[2])
+      
         return data_1, data_2, data_3
 
 def calculate_products():
@@ -95,7 +100,6 @@ def selectConfig(contenedor):
     record = fb.get(address, None)
     diametro = record["diametro"]
     return diametro
-
 
 def main():
     srl = Sensor()
