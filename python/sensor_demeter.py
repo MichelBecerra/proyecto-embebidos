@@ -3,6 +3,33 @@ import time
 import serial
 import serial.tools.list_ports as listPorts
 from firebase import firebase
+import smtplib
+
+BAUD = 9600
+TIMEOUT = 1
+USUARIO_GMAIL = 'alan061997@gmail.com'
+CONTRASENA_GMAIL = 'Alan4Ever'
+
+DESTINATARIO = 'guerra.guajardo12@gmail.com'
+REMITENTE = 'alan061997@gmail.com'
+
+ASUNTO	= ' Hay bajos niveles de productos en tu alacena '
+MENSAJE = ' ¡ China es gay ! '
+
+def enviar_correo_electronico():
+	print("Enviando e-mail")
+	smtpserver = smtplib.SMTP("smtp.gmail.com",587)		#Definimos el objeto 'smtpserver' con smptlib.SMTP, SMTP("",) Administra la conexión SMTP
+	smtpserver.ehlo()									#Este metodo prepara envíar un correo electronico
+	smtpserver.starttls()								#Pone la conexion con el servidor SMTP en el modo de TLS.
+	smtpserver.ehlo()
+	smtpserver.login(USUARIO_GMAIL, CONTRASENA_GMAIL)	#Iniciamos sesion en el SMTP server de Google
+	header	= 'To:		' + DESTINATARIO + '\n'			#Construimos el 'HEADER' para envíar el correo electronico
+	header += 'From:	' + REMITENTE	 + '\n'
+	header += 'Subject: ' + ASUNTO		 + '\n'
+	print (header)
+	msg = header + '\n' + MENSAJE + ' \n\n'				#Concatenamos el'HEADER' y el 'MENSAJE' del correo electronico
+	smtpserver.sendmail(REMITENTE, DESTINATARIO, msg)	#Enviamos el correo electronico
+	smtpserver.close()									#Cerramos la conexion con el SMTP server de Google
 
 BAUD = 9600
 TIMEOUT = 1
@@ -40,9 +67,11 @@ class Sensor():
         while(self.serial.inWaiting() > 0):
             data = self.serial.readline().decode('utf-8').strip()
         data = self.serial.readline().decode('utf-8').strip()
-        data_1 = data.split(' ')[0]
-        data_2 = data.split(' ')[1]
-        data_3 = data.split(' ')[2]
+        
+        data_1 = 26 - float(data.split(' ')[0])
+        data_2 = 26 - float(data.split(' ')[1])
+        data_3 = 26 - float(data.split(' ')[2])
+      
         return data_1, data_2, data_3
 
 def calculate_products():
@@ -65,6 +94,13 @@ def updateCantidad(contenedor, cantidad):
     print(result)
     return result
 
+def selectConfig(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Config/' + contenedor
+    record = fb.get(address, None)
+    diametro = record["diametro"]
+    return diametro
+
 def main():
     srl = Sensor()
     srl.init_sensor()
@@ -73,10 +109,16 @@ def main():
     while True:
         time.sleep(2)
         data_1, data_2, data_3 = srl.read_data()
-        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(data_1, data_2, data_3))
-        updateCantidad("contenedorUno", data_1)
-        updateCantidad("contenedorDos", data_2)
-        updateCantidad("contenedorTres", data_3)
+        config1 = float(selectConfig("contenedorUno"))
+        config2 = float(selectConfig("contenedorDos"))
+        config3 = float(selectConfig("contenedorTres"))
+        print ("Distance 1: {}\nDistance 2: {}\nDistance 3: {}\n\n".format(abs(round(data_1/config1)), abs(round(data_2/config2)), abs(round(data_3/config3))))
+        updateCantidad("contenedorUno", abs(round(data_1/config1)))
+        updateCantidad("contenedorDos", abs(round(data_2/config2)))
+        updateCantidad("contenedorTres", abs(round(data_3/config3)))
+        if data_1 < 2 :							#Si la linea contiene a 'H' envia un correo electronico
+            enviar_correo_electronico()
+            time.sleep(0.5)
 
 
 if __name__ == '__main__':

@@ -16,7 +16,6 @@ def updateCantidad(contenedor, cantidad):
     print(result)
     return result
 
-
 #from firebase import firebase
 #from firebase_admin import db
 #import threading
