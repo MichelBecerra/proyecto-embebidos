@@ -3,33 +3,6 @@ import time
 import serial
 import serial.tools.list_ports as listPorts
 from firebase import firebase
-import smtplib
-
-BAUD = 9600
-TIMEOUT = 1
-USUARIO_GMAIL = 'alan061997@gmail.com'
-CONTRASENA_GMAIL = 'Alan4Ever'
-
-DESTINATARIO = 'guerra.guajardo12@gmail.com'
-REMITENTE = 'alan061997@gmail.com'
-
-ASUNTO	= ' Hay bajos niveles de productos en tu alacena '
-MENSAJE = ' ¡ China es gay ! '
-
-def enviar_correo_electronico():
-	print("Enviando e-mail")
-	smtpserver = smtplib.SMTP("smtp.gmail.com",587)		#Definimos el objeto 'smtpserver' con smptlib.SMTP, SMTP("",) Administra la conexión SMTP
-	smtpserver.ehlo()									#Este metodo prepara envíar un correo electronico
-	smtpserver.starttls()								#Pone la conexion con el servidor SMTP en el modo de TLS.
-	smtpserver.ehlo()
-	smtpserver.login(USUARIO_GMAIL, CONTRASENA_GMAIL)	#Iniciamos sesion en el SMTP server de Google
-	header	= 'To:		' + DESTINATARIO + '\n'			#Construimos el 'HEADER' para envíar el correo electronico
-	header += 'From:	' + REMITENTE	 + '\n'
-	header += 'Subject: ' + ASUNTO		 + '\n'
-	print (header)
-	msg = header + '\n' + MENSAJE + ' \n\n'				#Concatenamos el'HEADER' y el 'MENSAJE' del correo electronico
-	smtpserver.sendmail(REMITENTE, DESTINATARIO, msg)	#Enviamos el correo electronico
-	smtpserver.close()									#Cerramos la conexion con el SMTP server de Google
 
 BAUD = 9600
 TIMEOUT = 1
@@ -74,10 +47,6 @@ class Sensor():
       
         return data_1, data_2, data_3
 
-def calculate_products():
-    for product in product_list.keys():
-        product
-
 
 def selectContenedor(contenedor):
     fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
@@ -105,15 +74,10 @@ def main():
     srl = Sensor()
     srl.init_sensor()
     print ("Leyendo datos ...")
-    print ("Jala...0")
     time.sleep(3)
-    print ("Jala...1")
     while True:
-	print ("Jala...2")
         time.sleep(2)
-	print ("Jala...3")
         data_1, data_2, data_3 = srl.read_data()
-	print ("Jala...4")
         config1 = float(selectConfig("contenedorUno"))
         config2 = float(selectConfig("contenedorDos"))
         config3 = float(selectConfig("contenedorTres"))
@@ -121,9 +85,6 @@ def main():
         updateCantidad("contenedorUno", abs(round(data_1/config1)))
         updateCantidad("contenedorDos", abs(round(data_2/config2)))
         updateCantidad("contenedorTres", abs(round(data_3/config3)))
-        if data_1 < 2 :							#Si la linea contiene a 'H' envia un correo electronico
-            enviar_correo_electronico()
-            time.sleep(0.5)
 
 
 if __name__ == '__main__':
