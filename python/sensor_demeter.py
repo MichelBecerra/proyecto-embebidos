@@ -55,18 +55,19 @@ class Sensor():
         return data_1, data_2, data_3
 
 
-def selectContenedor(contenedor):
-    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
-    address = '/Sensores/' + contenedor
-    result = fb.get(address, None)
-    print(result)
-    return result
 
-# update/post
 def updateCantidad(contenedor, cantidad):
     fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
     address = '/Sensores/' + contenedor
     result = fb.put(address, 'cantidad', cantidad)
+    print(result)
+    return result
+
+
+def selectContenedor(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    result = fb.get(address, None)
     print(result)
     return result
 
@@ -140,13 +141,13 @@ def main():
             MENSAJE = " "
             if cantidad_1 <= 1:
                 ASUNTO	+= " | " + getProductName("contenedorUno") + " | "
-                MENSAJE += " El producto 1 esta por agotarse/esta agotado.\n "
+                MENSAJE += " El" + getProductName("contenedorUno") + " esta por agotarse/esta agotado.\n "
             if cantidad_2 <= 1:
                 ASUNTO	+= " | " + getProductName("contenedorDos") + " | "
-                MENSAJE += " El producto 2 esta por agotarse/esta agotado.\n "
+                MENSAJE += " El" + getProductName("contenedorDos") + " esta por agotarse/esta agotado.\n "
             if cantidad_3 <= 1:
                 ASUNTO	+= " | " + getProductName("contenedorTres") + " | "
-                MENSAJE += " El producto 3 esta por agotarse/esta agotado.\n "
+                MENSAJE += " El" + getProductName("contenedorTres") + " esta por agotarse/esta agotado.\n "
             ASUNTO +=  " esta(n) por agotarse/ esta(n) agotado(s). "
             enviar_correo_electronico()
             print("\n\n")
