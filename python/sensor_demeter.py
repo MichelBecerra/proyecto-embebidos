@@ -120,13 +120,13 @@ def main():
         print("\n\n")
 
         if cycle_counter == 0 and (( (cantidad_1 <= 1) or (cantidad_2 <= 1) ) or (cantidad_3 <= 1)):
-            ASUNTO = ' El '
+            ASUNTO = " El "
             if cantidad_1 <= 1:
                 ASUNTO	+= " | producto 1 | "
                 MENSAJE = " El producto 1 esta por agotarse/esta agotado.\n "
             if cantidad_2 <= 1:
                 ASUNTO	+= " | producto 2 | "
-                MENSAJE = ' El producto 2 esta por agotarse/esta agotado.\n "
+                MENSAJE = " El producto 2 esta por agotarse/esta agotado.\n "
             if cantidad_3 <= 1:
                 ASUNTO	+= " | producto 3 | "
                 MENSAJE =  " El producto 3 esta por agotarse/esta agotado.\n "
