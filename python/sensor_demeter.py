@@ -93,6 +93,7 @@ def enviar_correo_electronico():
 	smtpserver.close()
 
 def main():
+    global cycle_counter
     srl = Sensor()
     srl.init_sensor()
     print ("Leyendo datos ...")
