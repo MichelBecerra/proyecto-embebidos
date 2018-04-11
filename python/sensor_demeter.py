@@ -11,7 +11,7 @@ TIMEOUT = 1
 USUARIO_GMAIL = 'alan061997@gmail.com'
 CONTRASENA_GMAIL = 'Alan4Ever'
 
-DESTINATARIO = 'alan.darksunset@gmail.com'
+DESTINATARIO = ""
 REMITENTE = 'alan061997@gmail.com'
 
 ASUNTO	= ""
@@ -77,13 +77,29 @@ def selectConfig(contenedor):
     diametro = record["diametro"]
     return diametro
 
+def getEmail():
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Config/correo'
+    record = fb.get(address, None)
+    mail = record["dir"]
+    return mail
+
+def getProductName(contenedor):
+    fb = firebase.FirebaseApplication('https://demeter-siade.firebaseio.com/', None)
+    address = '/Sensores/' + contenedor
+    record = fb.get(address, None)
+    producto = record["producto"]
+    return producto
+
 def enviar_correo_electronico():
+    global DESTINATARIO
 	print("Enviando e-mail")
 	smtpserver = smtplib.SMTP("smtp.gmail.com",587)
 	smtpserver.ehlo()
 	smtpserver.starttls()
 	smtpserver.ehlo()
 	smtpserver.login(USUARIO_GMAIL, CONTRASENA_GMAIL)
+    DESTINATARIO = getEmail()
 	header	= 'To:		' + DESTINATARIO + '\n'
 	header += 'From:	' + REMITENTE	 + '\n'
 	header += 'Subject: ' + ASUNTO		 + '\n'
@@ -120,17 +136,18 @@ def main():
         print("\n\n")
 
         if cycle_counter == 0 and (( (cantidad_1 <= 1) or (cantidad_2 <= 1) ) or (cantidad_3 <= 1)):
-            ASUNTO = " El "
+            ASUNTO = " Los/El "
+            MENSAJE = " "
             if cantidad_1 <= 1:
-                ASUNTO	+= " | producto 1 | "
+                ASUNTO	+= " | " + getProductName("contenedorUno") + " | "
                 MENSAJE += " El producto 1 esta por agotarse/esta agotado.\n "
             if cantidad_2 <= 1:
-                ASUNTO	+= " | producto 2 | "
+                ASUNTO	+= " | " + getProductName("contenedorDos") + " | "
                 MENSAJE += " El producto 2 esta por agotarse/esta agotado.\n "
             if cantidad_3 <= 1:
-                ASUNTO	+= " | producto 3 | "
-                MENSAJE +=  " El producto 3 esta por agotarse/esta agotado.\n "
-            ASUNTO +=  " esta por agotarse/ esta agotado. "
+                ASUNTO	+= " | " + getProductName("contenedorTres") + " | "
+                MENSAJE += " El producto 3 esta por agotarse/esta agotado.\n "
+            ASUNTO +=  " esta(n) por agotarse/ esta(n) agotado(s). "
             enviar_correo_electronico()
             print("\n\n")
             time.sleep(3)
