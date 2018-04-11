@@ -123,13 +123,13 @@ def main():
             ASUNTO = " El "
             if cantidad_1 <= 1:
                 ASUNTO	+= " | producto 1 | "
-                MENSAJE = " El producto 1 esta por agotarse/esta agotado.\n "
+                MENSAJE += " El producto 1 esta por agotarse/esta agotado.\n "
             if cantidad_2 <= 1:
                 ASUNTO	+= " | producto 2 | "
-                MENSAJE = " El producto 2 esta por agotarse/esta agotado.\n "
+                MENSAJE += " El producto 2 esta por agotarse/esta agotado.\n "
             if cantidad_3 <= 1:
                 ASUNTO	+= " | producto 3 | "
-                MENSAJE =  " El producto 3 esta por agotarse/esta agotado.\n "
+                MENSAJE +=  " El producto 3 esta por agotarse/esta agotado.\n "
             ASUNTO +=  " esta por agotarse/ esta agotado. "
             enviar_correo_electronico()
             print("\n\n")
