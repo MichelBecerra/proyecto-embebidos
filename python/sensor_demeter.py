@@ -14,8 +14,8 @@ CONTRASENA_GMAIL = 'Alan4Ever'
 DESTINATARIO = 'alan.darksunset@gmail.com'
 REMITENTE = 'alan061997@gmail.com'
 
-ASUNTO	= ' '
-MENSAJE = ' '
+ASUNTO	= ""
+MENSAJE = ""
 
 cycle_counter = 0
 
@@ -94,6 +94,8 @@ def enviar_correo_electronico():
 
 def main():
     global cycle_counter
+    global ASUNTO
+    global MENSAJE
     srl = Sensor()
     srl.init_sensor()
     print ("Leyendo datos ...")
@@ -120,15 +122,15 @@ def main():
         if cycle_counter == 0 and (( (cantidad_1 <= 1) or (cantidad_2 <= 1) ) or (cantidad_3 <= 1)):
             ASUNTO = ' El '
             if cantidad_1 <= 1:
-                ASUNTO	+= ' | producto 1 | '
-                MENSAJE = ' El producto 1 esta por agotarse/esta agotado.\n '
+                ASUNTO	+= " | producto 1 | "
+                MENSAJE = " El producto 1 esta por agotarse/esta agotado.\n "
             if cantidad_2 <= 1:
-                ASUNTO	+= ' | producto 2 | '
-                MENSAJE = ' El producto 2 esta por agotarse/esta agotado.\n '
+                ASUNTO	+= " | producto 2 | "
+                MENSAJE = ' El producto 2 esta por agotarse/esta agotado.\n "
             if cantidad_3 <= 1:
-                ASUNTO	+= ' | producto 3 | '
-                MENSAJE = ' El producto 3 esta por agotarse/esta agotado.\n '
-            ASUNTO += ' esta por agotarse/ esta agotado '
+                ASUNTO	+= " | producto 3 | "
+                MENSAJE =  " El producto 3 esta por agotarse/esta agotado.\n "
+            ASUNTO +=  " esta por agotarse/ esta agotado. "
             enviar_correo_electronico()
             print("\n\n")
             time.sleep(3)
