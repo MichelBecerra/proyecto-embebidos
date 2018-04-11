@@ -93,7 +93,7 @@ def getProductName(contenedor):
 
 def enviar_correo_electronico():
     global DESTINATARIO
-	print("Enviando e-mail")
+    print("Enviando e-mail")
 	smtpserver = smtplib.SMTP("smtp.gmail.com",587)
 	smtpserver.ehlo()
 	smtpserver.starttls()
