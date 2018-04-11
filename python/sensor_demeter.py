@@ -94,19 +94,19 @@ def getProductName(contenedor):
 def enviar_correo_electronico():
     global DESTINATARIO
     print("Enviando e-mail")
-	smtpserver = smtplib.SMTP("smtp.gmail.com",587)
-	smtpserver.ehlo()
-	smtpserver.starttls()
-	smtpserver.ehlo()
-	smtpserver.login(USUARIO_GMAIL, CONTRASENA_GMAIL)
+    smtpserver = smtplib.SMTP("smtp.gmail.com",587)
+    smtpserver.ehlo()
+    smtpserver.starttls()
+    smtpserver.ehlo()
+    smtpserver.login(USUARIO_GMAIL, CONTRASENA_GMAIL)
     DESTINATARIO = getEmail()
-	header	= 'To:		' + DESTINATARIO + '\n'
-	header += 'From:	' + REMITENTE	 + '\n'
-	header += 'Subject: ' + ASUNTO		 + '\n'
-	print (header)
-	msg = header + '\n' + MENSAJE + ' \n\n'
-	smtpserver.sendmail(REMITENTE, DESTINATARIO, msg)
-	smtpserver.close()
+    header	= 'To:		' + DESTINATARIO + '\n'
+    header += 'From:	' + REMITENTE	 + '\n'
+    header += 'Subject: ' + ASUNTO		 + '\n'
+    print (header)
+    msg = header + '\n' + MENSAJE + ' \n\n'
+    smtpserver.sendmail(REMITENTE, DESTINATARIO, msg)
+    smtpserver.close()
 
 def main():
     global cycle_counter
