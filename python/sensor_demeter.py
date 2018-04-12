@@ -8,7 +8,7 @@ import smtplib
 BAUD = 9600
 TIMEOUT = 1
 USUARIO_GMAIL = 'alan061997@gmail.com'
-CONTRASENA_GMAIL = 'Alan4Ever'
+CONTRASENA_GMAIL = '*********'
 
 DESTINATARIO = 'guerra.guajardo12@gmail.com'
 REMITENTE = 'alan061997@gmail.com'
